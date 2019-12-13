@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/vue"></script>
+        <script src="https://unpkg.com/vuex"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vuex-mapstate-modelvalue-instrict@0.0.4/dist/mapStateModelValueInStrict.common.min.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{count}}</h1>
+            <h2>{{localCount}}</h2>
+        </div>
+        <script >
+            const store= new Vuex.Store({
+                state:{
+                    count:5
+                },
+                mutation:{
+
+                }
+            })
+            new Vue({
+                el:"#app",
+                store,
+                data(){
+                    return{
+                        localCount:8
+                    }
+                },
+           //      computed:Vuex.mapState({
+           //      	count: state => state.count,
+        			// countAlias: 'count',
+        			// countPlusLocalState (state) {
+           //  			return state.count + this.localCount
+           //          }
+           //      })    
+		           computed: Vuex.mapState([
+        				'count','localCount'
+    				])
+
+
+            })
+            
+        </script>
+    </body>
+</html>

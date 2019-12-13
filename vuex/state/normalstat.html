@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/vue"></script>
+        <script src="https://unpkg.com/vuex"></script>
+        
+    </head>
+    <body>
+        <div id="app">
+            <h1>Normal vue message :: {{welcome}}</h1>
+            <h2>The message From the Store vuex ::{{direct_access_counter_data_from_store}}</h2>
+            <h2>The message From the Store vuex ::{{access_counter_data_from_store_using_computed}}</h2>
+        </div>
+        <script >
+            const store= new Vuex.Store({
+                state:{
+                    count:5
+                },
+                mutation:{
+
+                }
+            })
+            new Vue({
+                el:"#app",
+                data(){
+                    return{
+                        welcome:'Welcome World',
+                        direct_access_counter_data_from_store:store.state.count
+                    }
+                },
+                computed:{
+                    access_counter_data_from_store_using_computed(){
+                        return store.state.count
+                    }
+                }
+
+            })
+            
+        </script>
+    </body>
+</html>

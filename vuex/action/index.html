@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/vue"></script>
+        <script src="https://unpkg.com/vuex"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>The message from the data on  vue  :: {{welcome}}</h1>
+            <h2>Incremented Counter is::{{count}}</h2>
+            <h2>Use of action</h2><button @click="pressed">Increment Counter</button>
+            
+        </div>
+        <script >
+            const store= new Vuex.Store({
+                state:{
+                    message:'Welcome in the world of vue x...',
+                    count:5
+                   
+                },
+                mutations:{
+                    increment_mutation(state,payload){
+                        state.count+=payload;
+                        
+                    }
+
+                },
+                actions:{
+                    increment_action(state,payload){
+                        state.commit('increment_mutation',payload);
+                        
+                    }
+
+                },
+                getters:{ 
+                    // Write the code in the getters method and the this data is called by the computed
+                   counter(state){
+                    return state.count;
+
+                    },
+
+                }
+            })
+            new Vue({
+                el:"#app",
+                data(){
+                    return{
+                        welcome:'Welcome World',
+                        direct_access_counter_data_from_store:store.state.count
+                    }
+                },
+                computed:{
+                    count(){
+                        return store.getters.counter
+                    }
+                },
+                methods:{
+                    pressed(){
+                        store.dispatch('increment_action',20);
+                    }
+                }
+
+            })
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<script src="https://unpkg.com/vue"></script>
+    	<script src="https://unpkg.com/vuex"></script>
+    </head>
+    <body>
+    	<div id="app">
+    		<h1>The message from the data on  vue  :: {{welcome}}</h1>
+    		<h2>The message get From getters ::{{message}}</h2>
+            
+    	</div>
+        <script >
+        	const store= new Vuex.Store({
+        		state:{
+                    message:'Welcome in the world of vue x...',
+        			count:5
+                   
+        		},
+                mutation:{
+
+                },
+                action:{
+
+                },
+                getters:{ 
+                    // Write the code in the getters method and the this data is called by the computed
+                    message1(state){
+                        return state.message.toUpperCase();
+
+                    },
+
+                }
+        	})
+        	new Vue({
+        		el:"#app",
+        		data(){
+        			return{
+        				welcome:'Welcome World',
+        				direct_access_counter_data_from_store:store.state.count
+        			}
+        		},
+                computed:{
+                    message(){
+                        return store.getters.message1
+                    }
+                }
+
+        	})
+        	
+        </script>
+    </body>
+</html>
